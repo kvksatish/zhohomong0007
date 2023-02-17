@@ -62,7 +62,7 @@ function debouncedFunction() {
     timeoutId = setTimeout(() => {
         requestin30min = false
         timeoutId = null;
-    }, 1000 * 60 * 10);
+    }, 1000 * 60 * 5);
 }
 
 
@@ -78,7 +78,7 @@ setInterval(() => {
             })
         })
     }
-}, 1000 * 60 * 1);
+}, 1000 * 60 * 0.7);
 
 
 //////////////////writing/////////////////////////
