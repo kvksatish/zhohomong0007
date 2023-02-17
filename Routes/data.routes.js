@@ -25,17 +25,17 @@ async function alldata() {
     console.log("44444")
     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
     console.log("555555")
-    // let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
+    let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
     console.log("66666")
-    return { result1, result2 }
+    return { result1, result2, bulkData }
     // return bulkData?.data;
 }
 
 
-// async function bulkapi(accessToken, nextGet) {
-//     let data = await axios.get(`https://zohobulkapi.vercel.app/getdata?accessToken=${accessToken}&nextGet=${nextGet}`);
-//     return data;
-// }
+async function bulkapi(accessToken, nextGet) {
+    let data = await axios.get(`https://zohobulkapi.vercel.app/getdata?accessToken=${accessToken}&nextGet=${nextGet}`);
+    return data;
+}
 
 // //////////////////functions//////////////////////
 
