@@ -1,23 +1,23 @@
-// const { Router } = require("express")
-// const mongoose = require("mongoose");
-// const axios = require('axios')
+const { Router } = require("express")
+const mongoose = require("mongoose");
+const axios = require('axios')
 
 
-// const dataController = Router()
+const dataController = Router()
 
 
-// const datascheme = new mongoose.Schema({
-//     data: Array
-// });
+const datascheme = new mongoose.Schema({
+    data: Array
+});
 
-// const DataModel = mongoose.model("data", datascheme);
+const DataModel = mongoose.model("data", datascheme);
 
-// dataController.get("/get", async (req, res) => {
-//     // console.log(req.body)
-//     debouncedFunction()
-//     const result = await DataModel.find()
-//     res.send(result)
-// })
+dataController.get("/get", async (req, res) => {
+    // console.log(req.body)
+    // debouncedFunction()
+    const result = await DataModel.find()
+    res.send(result)
+})
 
 
 // async function alldata() {
@@ -104,6 +104,6 @@
 
 
 
-// module.exports = {
-//     dataController
-// }
+module.exports = {
+    dataController
+}

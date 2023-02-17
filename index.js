@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require("cors")
 require("dotenv").config()
 const { connection } = require("./Config/db.js")
-//const { dataController } = require("./Routes/data.routes.js")
+const { dataController } = require("./Routes/data.routes.js")
 
 
 const app = express()
@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
     res.send("welcome")
 })
 
-//app.use("/zoho", dataController)
+app.use("/zoho", dataController)
 
 
 app.listen(7500, async () => {
