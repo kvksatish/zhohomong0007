@@ -37,8 +37,6 @@ async function alldata() {
 }
 
 
-
-
 async function bulkapi(accessToken, nextGet) {
     let data = await axios.get(`https://zohobulkapi.vercel.app/getdata?accessToken=${accessToken}&nextGet=${nextGet}`);
     return data;
@@ -46,11 +44,19 @@ async function bulkapi(accessToken, nextGet) {
 
 // //////////////////functions//////////////////////
 
-let requestin30min = false
+async function writeData(data) {
+    let jdata = {
+        "data": data
+    }
+    const result = await DataModel.updateOne({ _id: '63da16a4f853f245bb15c049' }, { $set: jdata })
+    return result
+}
+
 
 // //////////////////////timers////////////////////////
 
 
+let requestin30min = false
 let timeoutId;
 
 function debouncedFunction() {
@@ -69,7 +75,9 @@ function debouncedFunction() {
 setInterval(() => {
     if (requestin30min) {
         alldata().then((res) => {
+            console.log("alldata exe")
             writeData(res).then((res) => {
+
             }).catch((err) => {
             })
         })
@@ -79,13 +87,7 @@ setInterval(() => {
 
 //////////////////writing/////////////////////////
 
-async function writeData(data) {
-    let jdata = {
-        "data": data
-    }
-    const result = await DataModel.updateOne({ _id: '63da16a4f853f245bb15c049' }, { $set: jdata })
-    return result
-}
+
 
 
 
