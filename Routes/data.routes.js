@@ -15,26 +15,26 @@ const DataModel = mongoose.model("data", datascheme);
 
 
 
-async function alldata() {
+// async function alldata() {
 
-    let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
+//     let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-    let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
+//     let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-    let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
+//     let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
 
-    return bulkData?.data;
-}
+//     return bulkData?.data;
+// }
 
 
-async function bulkapi(accessToken, nextGet) {
-    let data = await axios.get(`https://zohobulkapi.vercel.app/getdata?accessToken=${accessToken}&nextGet=${nextGet}`);
-    return data;
-}
+// async function bulkapi(accessToken, nextGet) {
+//     let data = await axios.get(`https://zohobulkapi.vercel.app/getdata?accessToken=${accessToken}&nextGet=${nextGet}`);
+//     return data;
+// }
 
 // //////////////////functions//////////////////////
 
@@ -86,9 +86,13 @@ dataController.get("/get", async (req, res) => {
     // debouncedFunction()
     const result = await DataModel.find()
     res.send(result)
-    alldata().then((res) => {
-        console.log(res)
-    })
+
+    // alldata().then((res) => {
+    //     console.log(res)
+    // })
+
+    let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
+    console.log(result1)
 })
 
 
