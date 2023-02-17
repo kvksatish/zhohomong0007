@@ -12,29 +12,23 @@ const datascheme = new mongoose.Schema({
 
 const DataModel = mongoose.model("data", datascheme);
 
-dataController.get("/get", async (req, res) => {
-
-    debouncedFunction()
-
-    const result = await DataModel.find()
-    res.send(result)
-})
 
 
-async function alldata() {
 
-    let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
+// async function alldata() {
 
-    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+//     let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-    let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
+//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+//     let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-    let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
+//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-    return bulkData?.data;
-}
+//     let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
+
+//     return bulkData?.data;
+// }
 
 
 async function bulkapi(accessToken, nextGet) {
@@ -44,13 +38,13 @@ async function bulkapi(accessToken, nextGet) {
 
 // //////////////////functions//////////////////////
 
-async function writeData(data) {
-    let jdata = {
-        "data": data
-    }
-    const result = await DataModel.updateOne({ _id: '63da16a4f853f245bb15c049' }, { $set: jdata })
-    return result
-}
+// async function writeData(data) {
+//     let jdata = {
+//         "data": data
+//     }
+//     const result = await DataModel.updateOne({ _id: '63da16a4f853f245bb15c049' }, { $set: jdata })
+//     return result
+// }
 
 
 // //////////////////////timers////////////////////////
@@ -67,27 +61,33 @@ function debouncedFunction() {
     timeoutId = setTimeout(() => {
         requestin30min = false
         timeoutId = null;
-    }, 1000 * 60 * 20);
+    }, 1000 * 60 * 10);
 }
 
 
 
-setInterval(() => {
-    if (requestin30min) {
-        alldata().then((res) => {
-            console.log("alldata exe")
-            writeData(res).then((res) => {
+// setInterval(() => {
+//     if (requestin30min) {
+//         alldata().then((res) => {
+//             console.log("alldata exe")
+//             writeData(res).then((res) => {
 
-            }).catch((err) => {
-            })
-        })
-    }
-}, 1000 * 60 * 1);
+//             }).catch((err) => {
+//             })
+//         })
+//     }
+// }, 1000 * 60 * 1);
 
 
 //////////////////writing/////////////////////////
 
+dataController.get("/get", async (req, res) => {
 
+    debouncedFunction()
+
+    const result = await DataModel.find()
+    res.send(result)
+})
 
 
 
