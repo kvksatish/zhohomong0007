@@ -15,20 +15,20 @@ const DataModel = mongoose.model("data", datascheme);
 
 
 
-// async function alldata() {
+async function alldata() {
 
-//     let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
+    let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-//     let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
+    let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-//     let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
+    let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
 
-//     return bulkData?.data;
-// }
+    return bulkData?.data;
+}
 
 
 // async function bulkapi(accessToken, nextGet) {
@@ -66,17 +66,17 @@ function debouncedFunction() {
 
 
 
-// setInterval(() => {
-//     if (requestin30min) {
-//         alldata().then((res) => {
-//             console.log("alldata exe")
-//             writeData(res).then((res) => {
+setInterval(() => {
+    if (requestin30min) {
+        alldata().then((res) => {
+            console.log("alldata exe")
+            // writeData(res).then((res) => {
 
-//             }).catch((err) => {
-//             })
-//         })
-//     }
-// }, 1000 * 60 * 1);
+            // }).catch((err) => {
+            // })
+        })
+    }
+}, 1000 * 60 * 1);
 
 
 //////////////////writing/////////////////////////
