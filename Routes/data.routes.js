@@ -27,8 +27,8 @@ async function alldata() {
     console.log("555555")
     let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
     console.log("66666")
-    return { result1, result2, bulkData }
-    // return bulkData?.data;
+    // return { result1, result2, bulkData }
+    return bulkData?.data;
 }
 
 
