@@ -1,10 +1,16 @@
 const { Router } = require("express")
-const { DataModel } = require("../Models/DataModel.js")
+const mongoose = require("mongoose");
 const axios = require('axios')
 
 
 const dataController = Router()
 
+
+const datascheme = new mongoose.Schema({
+    data: Array
+});
+
+const DataModel = mongoose.model("data", datascheme);
 
 dataController.get("/get", async (req, res) => {
     // console.log(req.body)
