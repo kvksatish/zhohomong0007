@@ -13,94 +13,79 @@ const datascheme = new mongoose.Schema({
 const DataModel = mongoose.model("data", datascheme);
 
 dataController.get("/get", async (req, res) => {
-    // console.log(req.body)
-    // debouncedFunction()
+
+    debouncedFunction()
+
     const result = await DataModel.find()
     res.send(result)
 })
 
 
-// async function alldata() {
-//     //  console.log("alldata");
+async function alldata() {
 
-//     let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
-//     //console.log(result1.data, 111)
+    let result1 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-//     let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
-//     // console.log(result2.data, 222)
-//     // Wait for 30 seconds before making the second API call
-//     await new Promise(resolve => setTimeout(resolve, 1000 * 10));
+    let result2 = await axios.get("https://zohocrmdata.vercel.app/getdata");
 
-//     let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
+    await new Promise(resolve => setTimeout(resolve, 1000 * 10));
 
-//     //console.log(bulkData, 333);
-//     return bulkData?.data;
-// }
+    let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
+
+    return bulkData?.data;
+}
 
 
 
 
-// async function bulkapi(accessToken, nextGet) {
-//     //  console.log(accessToken, nextGet)
-//     let data = await axios.get(`https://zohobulkapi.vercel.app/getdata?accessToken=${accessToken}&nextGet=${nextGet}`);
-//     return data;
-// }
+async function bulkapi(accessToken, nextGet) {
+    let data = await axios.get(`https://zohobulkapi.vercel.app/getdata?accessToken=${accessToken}&nextGet=${nextGet}`);
+    return data;
+}
 
 // //////////////////functions//////////////////////
 
-// let requestin30min = false
+let requestin30min = false
 
 // //////////////////////timers////////////////////////
 
 
-// let timeoutId;
+let timeoutId;
 
-// function debouncedFunction() {
-//     // console.log(requestin30min, 1);
-//     requestin30min = true
-//     //console.log(requestin30min, 2);
-//     if (timeoutId) {
-//         clearTimeout(timeoutId);
-//     }
-//     timeoutId = setTimeout(() => {
-//         // The actual function implementation goes here
-//         //console.log(requestin30min, 3);
-//         requestin30min = false
-//         //console.log(requestin30min, 4);
-//         timeoutId = null;
-//     }, 1000 * 60 * 20);
-// }
+function debouncedFunction() {
+    requestin30min = true
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+        requestin30min = false
+        timeoutId = null;
+    }, 1000 * 60 * 20);
+}
 
 
 
-// setInterval(() => {
-//     // console.log(requestin30min, 136)
-//     if (requestin30min) {
-//         alldata().then((res) => {
-//             writeData(res).then((res) => {
-//                 //   console.log("wrote", res)
-//             }).catch((err) => {
-//                 // console.log(err, 142)
-//             })
-//         })
-//     }
-// }, 1000 * 60 * 1);
+setInterval(() => {
+    if (requestin30min) {
+        alldata().then((res) => {
+            writeData(res).then((res) => {
+            }).catch((err) => {
+            })
+        })
+    }
+}, 1000 * 60 * 1);
 
 
-// //////////////////writing/////////////////////////
+//////////////////writing/////////////////////////
 
-// async function writeData(data) {
-//     // console.log(data, 152152)
-//     let jdata = {
-//         "data": data
-//     }
-//     // console.log("writedara 150")
-//     const result = await DataModel.updateOne({ _id: '63da16a4f853f245bb15c049' }, { $set: jdata })
-//     // console.log("result 152")
-//     return result
-// }
+async function writeData(data) {
+    let jdata = {
+        "data": data
+    }
+    const result = await DataModel.updateOne({ _id: '63da16a4f853f245bb15c049' }, { $set: jdata })
+    return result
+}
 
 
 
