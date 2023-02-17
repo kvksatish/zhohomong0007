@@ -27,7 +27,7 @@ async function alldata() {
     console.log("555555")
     let bulkData = await bulkapi(result2.data.accessToken, result1.data.nextGet);
     console.log("66666")
-
+    //console.log(bulkData.data)
     return bulkData.data;
 }
 
@@ -70,10 +70,11 @@ function debouncedFunction() {
 setInterval(() => {
     if (requestin30min) {
         alldata().then((res) => {
-            console.log("alldata exe")
+            console.log(res.length, "737373")
             writeData(res).then((res) => {
-
+                console.log(res, "757575")
             }).catch((err) => {
+                console.log(err, "777777")
             })
         })
     }
@@ -87,12 +88,6 @@ dataController.get("/get", async (req, res) => {
     debouncedFunction()
     const result = await DataModel.find()
     res.send(result)
-    console.log("000000")
-    alldata().then((res) => {
-        console.log(res)
-    })
-
-
 
 })
 
