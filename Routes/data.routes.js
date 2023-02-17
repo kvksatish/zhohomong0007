@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { DataModel } = require("../Models/DataModel")
+const { DataModel } = require("../Models/DataModel.js")
 const axios = require('axios')
 
 
